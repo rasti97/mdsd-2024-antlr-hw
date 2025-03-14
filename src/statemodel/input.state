@@ -1,0 +1,21 @@
+states {
+    initial S1 {green};
+    S2 {yellow};
+    S3 {red};
+    S4 {red, yellow};
+    S5 {} error;
+}
+
+transitions {
+    trans normal n1: S1 -> S2;
+    trans normal n1: S2 -> S3;
+    trans normal n1: S3 -> S4;
+    trans normal n1: S4 -> S1;
+
+    trans normal n2: S5 -> S3;
+
+    trans error e: S1 -> S5;
+    trans error e: S2 -> S5;
+    trans error e: S3 -> S5;
+    trans error e: S4 -> S5;
+}
