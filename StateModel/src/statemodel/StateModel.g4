@@ -3,16 +3,21 @@ grammar StateModel;
 // Parser rules
 model: statesBlock transitionsBlock;
 
-statesBlock: 'states' '{' stateDefinition* '}';
+statesBlock: STATES LCURLY stateDefinition* RCURLY;
 
-stateDefinition: ('initial')? ID ('{' colorList? '}')? ('error')? ';';
+stateDefinition: ('initial')? ID ('{' labelList? '}')? ('error')? ';';
 
-colorList: ID (',' ID)*;
+labelList: ID (',' ID)*;
 
 transitionsBlock: 'transitions' '{' transitionDefinition* '}';
 
 transitionDefinition: 'trans' ('normal' | 'error') ID ':' ID '->' ID ';';
 
 // Lexer rules
-ID: [a-zA-Z_][a-zA-Z_0-9]*;
+ID: [a-z][a-z0-9]*;
 WS: [ \t\r\n]+ -> skip;
+
+STATES: 'states';
+TRANSITIONS: 'transitions';
+LCURLY: '{';
+RCURLY: '}';
